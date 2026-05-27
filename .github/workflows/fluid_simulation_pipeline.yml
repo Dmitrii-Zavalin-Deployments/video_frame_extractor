@@ -103,7 +103,7 @@ jobs:
           echo "📤 Uploading video file to Dropbox..."
           python3 src/upload_to_dropbox.py \
             "$OUTPUT_FILE" \
-            "/engineering_simulations_pipeline/turbine_flow_animation.mp4" \
+            "/simulators/turbine_flow_animation.mp4" \
             "$REFRESH_TOKEN" \
             "$APP_KEY" \
             "$APP_SECRET"

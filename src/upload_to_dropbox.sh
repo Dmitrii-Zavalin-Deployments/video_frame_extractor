@@ -4,7 +4,7 @@
 APP_KEY="${APP_KEY}"
 APP_SECRET="${APP_SECRET}"
 REFRESH_TOKEN="${REFRESH_TOKEN}" # Corrected typo from REFREREF_TOKEN if it was there
-DROPBOX_BASE_FOLDER="/engineering_simulations_pipeline" # The base folder in your Dropbox where everything will go
+DROPBOX_BASE_FOLDER="/simulators" # The base folder in your Dropbox where everything will go
 
 # Define the local directory where all generated output files and folders reside
 LOCAL_OUTPUT_DIR="$GITHUB_WORKSPACE/data/testing-input-output"
@@ -32,7 +32,7 @@ find "$LOCAL_OUTPUT_DIR" -type f -print0 | while IFS= read -r -d $'\0' local_fil
 
     # Construct the full destination path on Dropbox.
     # This will include the base folder and the relative path, preserving the folder structure.
-    # Example: /engineering_simulations_pipeline/turbine_animation_frames/frame_0001.png
+    # Example: /simulators/turbine_animation_frames/frame_0001.png
     dropbox_destination_path="${DROPBOX_BASE_FOLDER}/${relative_path}"
 
     echo "📤 Uploading ${local_file_path} to Dropbox at: ${dropbox_destination_path}..."
