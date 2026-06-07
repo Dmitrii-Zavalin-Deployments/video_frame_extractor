@@ -1,0 +1,137 @@
+{
+  "$id": "video_frame_extractor_output.schema.json",
+  "title": "Video Frame Extractor Output",
+  "type": "object",
+  "additionalProperties": false,
+
+  "properties": {
+
+    "inputs": {
+      "type": "object",
+      "description": "Source video and extraction parameters used for this run.",
+      "additionalProperties": false,
+      "properties": {
+
+        "video_file": {
+          "type": "string",
+          "description": "Path to the input video file."
+        },
+
+        "frame_indices": {
+          "type": "array",
+          "description": "List of frame indices that were requested for extraction.",
+          "items": { "type": "integer" }
+        },
+
+        "timecodes": {
+          "type": "array",
+          "description": "Optional list of timecodes (in seconds) used for extraction.",
+          "items": { "type": "number" }
+        }
+      },
+      "required": ["video_file"]
+    },
+
+    "config": {
+      "type": "object",
+      "description": "Configuration for frame extraction and preprocessing.",
+      "additionalProperties": false,
+      "properties": {
+
+        "resize": {
+          "type": "object",
+          "description": "Optional resizing applied to extracted frames.",
+          "properties": {
+            "width": { "type": "integer" },
+            "height": { "type": "integer" }
+          }
+        },
+
+        "grayscale": {
+          "type": "boolean",
+          "description": "Whether frames were converted to grayscale."
+        },
+
+        "denoise": {
+          "type": "boolean",
+          "description": "Whether denoising was applied."
+        },
+
+        "normalize": {
+          "type": "boolean",
+          "description": "Whether pixel normalization was applied."
+        },
+
+        "reachability_analysis": {
+          "type": "object",
+          "description": "Configuration for generating reachability/access-analysis frames.",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "overlay_type": {
+              "type": "string",
+              "enum": ["none", "grid", "bounding_boxes", "motion_vectors"],
+              "description": "Type of overlay added to access-analysis frames."
+            }
+          }
+        }
+      }
+    },
+
+    "results": {
+      "type": "object",
+      "description": "Extracted frames, preprocessing outputs, and reachability-analysis artifacts.",
+      "additionalProperties": false,
+
+      "properties": {
+
+        "output_directory": {
+          "type": "string",
+          "description": "Directory where extracted frames were saved."
+        },
+
+        "extracted_frames": {
+          "type": "array",
+          "description": "List of file paths to extracted and preprocessed frames.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "frame_index": { "type": "integer" },
+              "timecode": { "type": "number" },
+              "file_path": { "type": "string" }
+            },
+            "required": ["file_path"]
+          }
+        },
+
+        "reachability_frames": {
+          "type": "array",
+          "description": "List of file paths to reachability/access-analysis frames.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "frame_index": { "type": "integer" },
+              "file_path": { "type": "string" },
+              "overlay_type": { "type": "string" }
+            },
+            "required": ["file_path"]
+          }
+        },
+
+        "metadata": {
+          "type": "object",
+          "description": "Extraction metadata for reproducibility.",
+          "properties": {
+            "total_frames_extracted": { "type": "integer" },
+            "video_fps": { "type": "number" },
+            "video_duration_seconds": { "type": "number" },
+            "processing_time_seconds": { "type": "number" }
+          }
+        }
+      },
+
+      "required": ["output_directory", "extracted_frames"]
+    }
+  },
+
+  "required": ["inputs", "config", "results"]
+}
