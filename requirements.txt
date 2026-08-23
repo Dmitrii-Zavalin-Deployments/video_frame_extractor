@@ -1,21 +1,13 @@
-# Core dependencies
-numpy
-scipy
-matplotlib
+# Contract Enforcement
+jsonschema>=4.23.0
 
-# Fluid simulation (SPH-based modeling)
-pysph
+# Testing & Quality
+pytest>=8.3.0
+pytest-mock>=3.14.0
+pytest-cov>=4.1.0
+hypothesis>=6.103.1
 
-# Rendering and visualization
-vtk
-pyvista
-
-# Image processing & video generation
-opencv-python
-ffmpeg-python
-
-# CI/CD and automation
-requests
-dropbox
-
-
+# Scientific Pipeline Guard
+ruff>=0.9.0
+vulture>=2.9
+autoflake>=2.2.1
