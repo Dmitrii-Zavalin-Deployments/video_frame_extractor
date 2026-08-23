@@ -1,4 +1,4 @@
 {
-  "project": "$PROJECT_NAME",
-  "short_name": "$SHORT_NAME"
+  "project": "Video Frame Extractor",
+  "short_name": "video_frame_extractor"
 }

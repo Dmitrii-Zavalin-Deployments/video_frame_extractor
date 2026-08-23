@@ -1,4 +1,4 @@
-name: $PROJECT_NAME
+name: Video Frame Extractor
 
 on:
   push:
