@@ -1,7 +1,12 @@
 {
   "type": "object",
   "properties": {
-    "input_example": { "type": "string" }
+    "video_path": { "type": "string" },
+    "engine_images": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    }
   },
-  "required": ["input_example"]
+  "required": ["video_path", "engine_images"]
 }
