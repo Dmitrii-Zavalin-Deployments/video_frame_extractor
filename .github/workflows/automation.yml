@@ -442,6 +442,8 @@ jobs:
             echo "No ledger changes."
           fi
 
+          exit 1
+
       - name: 🔍 Forensic Audit
         if: always()
         run: |
