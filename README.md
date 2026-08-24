@@ -30,6 +30,12 @@ A deterministic frame preprocessing engine that injects the overlay object on to
 ---
 
 ### 🧮 Performance Audit:
+### Audit: 2026-08-24 13:28:45 UTC
+- **Branch:** `main`
+- **Status:** `failure`
+- **Run:** [Detailed Execution Logs](https://github.com/Dmitrii-Zavalin-Deployments/video_frame_extractor/actions/runs/32732589792)
+- **CPU Load:** `43.9%`
+- **Memory Usage:** `124/15989MB`
 ### Audit: 2026-08-24 13:18:37 UTC
 - **Branch:** `main`
 - **Status:** `success`
