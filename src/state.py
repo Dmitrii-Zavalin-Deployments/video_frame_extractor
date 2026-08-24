@@ -1,16 +1,18 @@
 # src/state.py
 from pathlib import Path
 import json
+from datetime import datetime, timezone
 
 class State:
     def __init__(self, input_data, config_data, input_output_folder):
         self.inputs = input_data
         self.config = config_data
 
-        # Results block (matches schema)
+        # Results block (matches schema including status, error, and timestamp)
         self.results = {
             "status": "pending",
-            "error": ""
+            "error": "",
+            "date_time": datetime.now(timezone.utc).isoformat()
         }
 
         # Internal working directories
@@ -29,6 +31,8 @@ class State:
         self.output_zip_path = Path(self.inputs["output_zip_path"])
 
     def to_output_json(self):
+        # Refresh date_time to reflect the precise moment output json is compiled/written
+        self.results["date_time"] = datetime.now(timezone.utc).isoformat()
         return {
             "inputs": self.inputs,
             "config": self.config,
@@ -38,4 +42,3 @@ class State:
     def write_output_json(self, output_path):
         with open(output_path, "w") as f:
             json.dump(self.to_output_json(), f, indent=2)
-

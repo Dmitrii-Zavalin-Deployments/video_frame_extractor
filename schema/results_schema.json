@@ -1,6 +1,6 @@
 {
   "type": "object",
-  "description": "Execution output details including final status and error logs if any.",
+  "description": "Execution output details including final status, timestamp, and error logs if any.",
   "properties": {
     "status": {
       "type": "string",
@@ -9,10 +9,16 @@
     "error": {
       "type": "string",
       "description": "Error description if the processing fails."
+    },
+    "date_time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp indicating when the execution occurred in ISO 8601 format (UTC)."
     }
   },
   "required": [
     "status",
-    "error"
+    "error",
+    "date_time"
   ]
 }
