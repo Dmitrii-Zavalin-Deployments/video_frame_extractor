@@ -281,16 +281,28 @@ jobs:
           echo "PEAK_MEM_USAGE=${MAX_RSS_MB}/${TOTAL_MEM_MB}MB" >> $GITHUB_ENV
           echo "✅ Profiler teardown clean. Peak CPU: ${PEAK_CPU}%, Peak Memory: ${MAX_RSS_MB}/${TOTAL_MEM_MB}MB"
 
-          exit 1
-
-      - name: 🔍 Post-Execution Artifact Verification
+      - name: 🔍 Post-Execution Artifact Verification & Zip Audit
         run: |
-          # Verify that JSON output manifest has been deterministically compiled
           echo "--- Verifying Generated Output Structure ---"
           ls -l data/testing-input-output/output.json
 
-          # Print output manifest summary for log tracing
-          head -n 30 data/testing-input-output/output.json
+          # Inspect output_frames.zip locally before git clean wipes it
+          ZIP_PATH="data/testing-input-output/output_frames.zip"
+          if [ -f "$ZIP_PATH" ]; then
+              echo "Inspecting contents of: $ZIP_PATH"
+              python3 -c "
+          import zipfile
+          with zipfile.ZipFile('$ZIP_PATH', 'r') as zf:
+              files = zf.namelist()
+              print(f'Total files inside archive: {len(files)}')
+              for name in files:
+                  if name.endswith('.zip'):
+                      print(f'⚠️ WARNING: Nested zip detected inside archive: {name}')
+          "
+                    else
+                        echo "❌ $ZIP_PATH not found."
+                        exit 1
+                    fi
       
       - name: 🛡 Post-Execution Schema Compliance Audit
         run: |
