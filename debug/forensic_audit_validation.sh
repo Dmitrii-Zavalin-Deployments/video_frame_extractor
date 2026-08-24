@@ -14,11 +14,11 @@ pip list
 
 # 2. Source Audits: Smoking-gun file inspections
 echo -e "\n[2/3] Performing Source Audits..."
-if [ -f "src/frame_extractor.py" ]; then
-    echo "--- Contents of src/frame_extractor.py ---"
-    cat -n src/frame_extractor.py
+if [ -f "src/overlay_engine.py" ]; then
+    echo "--- Contents of src/overlay_engine.py ---"
+    cat -n src/overlay_engine.py
 else
-    echo "Warning: src/frame_extractor.py not found."
+    echo "Warning: src/overlay_engine.py not found."
 fi
 
 if [ -f "requirements.txt" ]; then
@@ -31,24 +31,24 @@ fi
 # 3. Automated Repairs: Injecting missing dependencies & fixing environment
 echo -e "\n[3/3] Executing Automated Repairs..."
 
-# Ensure requirements.txt includes opencv-python-headless if it exists
+# Ensure requirements.txt includes Pillow if it exists
 if [ -f "requirements.txt" ]; then
-    if ! grep -qi "opencv-" requirements.txt; then
-        echo "Injecting 'opencv-python-headless' into requirements.txt..."
-        sed -i '$a opencv-python-headless' requirements.txt
+    if ! grep -qi "Pillow" requirements.txt; then
+        echo "Injecting 'Pillow' into requirements.txt..."
+        sed -i '$a Pillow' requirements.txt
         echo "Updated requirements.txt:"
         cat -n requirements.txt
     else
-        echo "OpenCV is already referenced in requirements.txt."
+        echo "Pillow is already referenced in requirements.txt."
     fi
 else
-    echo "Creating a requirements.txt with OpenCV..."
-    echo "opencv-python-headless" > requirements.txt
+    echo "Creating a requirements.txt with Pillow..."
+    echo "Pillow" > requirements.txt
 fi
 
 # Force-install the missing dependency immediately for the current CI run
-echo "Installing missing OpenCV dependency..."
-pip install --upgrade opencv-python-headless
+echo "Installing missing Pillow dependency..."
+pip install --upgrade Pillow
 
 echo "=================================================="
 echo "          AUDIT & REPAIR COMPLETE                 "
