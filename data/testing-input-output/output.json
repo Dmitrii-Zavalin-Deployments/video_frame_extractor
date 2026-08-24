@@ -19,7 +19,7 @@
     "frames_per_image": 1
   },
   "results": {
-    "status": "error",
-    "error": "No overlay PNGs found in overlay ZIP."
+    "status": "success",
+    "error": ""
   }
 }
