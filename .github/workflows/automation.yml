@@ -292,12 +292,33 @@ jobs:
               echo "Inspecting contents of: $ZIP_PATH"
               python3 -c "
           import zipfile
-          with zipfile.ZipFile('$ZIP_PATH', 'r') as zf:
-              files = zf.namelist()
-              print(f'Total files inside archive: {len(files)}')
-              for name in files:
-                  if name.endswith('.zip'):
-                      print(f'⚠️ WARNING: Nested zip detected inside archive: {name}')
+          from collections import Counter
+          from pathlib import Path
+
+          zip_path = '$ZIP_PATH'
+          with zipfile.ZipFile(zip_path, 'r') as zf:
+              namelist = zf.namelist()
+              print(f'Total files/entries inside archive: {len(namelist)}')
+
+              extensions = Counter()
+              nested_zips = []
+              
+              for name in namelist:
+                  if name.endswith('/'):
+                      continue  # Skip directories
+                  ext = Path(name).suffix.lower() or '(no extension)'
+                  extensions[ext] += 1
+                  if ext == '.zip':
+                      nested_zips.append(name)
+
+              print('\n📊 File Type / Extension Breakdown:')
+              for ext, count in extensions.most_common():
+                  print(f'   - {ext}: {count} file(s)')
+
+              if nested_zips:
+                  print(f'\n⚠️ WARNING: Nested zip(s) detected: {nested_zips}')
+              else:
+                  print('\n✅ Clean archive: No nested zip files found.')
           "
                     else
                         echo "❌ $ZIP_PATH not found."
