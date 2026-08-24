@@ -12,11 +12,10 @@ def run(state):
     with zipfile.ZipFile(overlay_zip, "r") as zf:
         zf.extractall(overlay_extract_dir)
 
-    overlay_images = sorted(list(overlay_extract_dir.glob("*.png")))
+    # Search recursively to handle nested folders inside the zip archive
+    overlay_images = sorted(list(overlay_extract_dir.rglob("*.png")))
     if not overlay_images:
-        state.results["status"] = "error"
-        state.results["error"] = "No overlay PNGs found in overlay ZIP."
-        return
+        raise ValueError("No overlay PNGs found in overlay ZIP.")
 
     frames_per_image = state.config["frames_per_image"]
     overlay_positions = state.config["overlay_positions"]
@@ -53,4 +52,3 @@ def run(state):
         out_path = state.processed_frames_dir / frame_path.name
         frame.save(out_path)
         state.processed_frame_paths.append(out_path)
-
