@@ -1,8 +1,23 @@
 {
   "type": "object",
   "properties": {
-    "project": { "type": "string" },
-    "short_name": { "type": "string" }
+    "overlay_positions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "x": { "type": "number" },
+          "y": { "type": "number" },
+          "pitch": { "type": "number" },
+          "roll": { "type": "number" },
+          "yaw": { "type": "number" },
+          "alpha": { "type": "number" }
+        },
+        "required": ["x", "y", "pitch", "roll", "yaw", "alpha"]
+      }
+    },
+    "frames_per_image": { "type": "number", "minimum": 1 },
+    "output_zip_name": { "type": "string" }
   },
-  "required": ["project", "short_name"]
+  "required": ["overlay_positions", "frames_per_image", "output_zip_name"]
 }

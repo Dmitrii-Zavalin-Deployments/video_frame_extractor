@@ -1,7 +1,9 @@
 {
   "type": "object",
   "properties": {
-    "status": { "type": "string" }
+    "status": { "type": "string" },
+    "frames_zip_path": { "type": "string" },
+    "total_frames": { "type": "number" }
   },
-  "required": ["status"]
+  "required": ["status", "frames_zip_path", "total_frames"]
 }

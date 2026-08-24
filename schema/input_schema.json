@@ -1,6 +1,7 @@
 {
   "type": "object",
   "properties": {
+<<<<<<< Updated upstream
     "video_path": { "type": "string" },
     "engine_images": {
       "type": "array",
@@ -10,3 +11,9 @@
   },
   "required": ["video_path", "engine_images"]
 }
+=======
+    "input_video": { "type": "string" }
+  },
+  "required": ["input_video"]
+}
+>>>>>>> Stashed changes
