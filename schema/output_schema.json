@@ -74,16 +74,10 @@
               "overlay_transparency"
             ]
           }
-        },
-        "frames_per_image": {
-          "type": "number",
-          "minimum": 1,
-          "description": "Number of video frames each overlay image should be displayed on."
         }
       },
       "required": [
-        "overlay_positions",
-        "frames_per_image"
+        "overlay_positions"
       ]
     },
     "results": {

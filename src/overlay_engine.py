@@ -17,14 +17,20 @@ def run(state):
     if not overlay_images:
         raise ValueError("No overlay PNGs found in overlay ZIP.")
 
-    frames_per_image = state.config["frames_per_image"]
+    # Dynamically compute frames_per_image based on total frame count and number of overlay images
+    total_frames = len(state.frame_paths)
+    num_images = len(overlay_images)
+    rem = total_frames % num_images
+    next_multiple = total_frames if rem == 0 else total_frames + (num_images - rem)
+    frames_per_image = next_multiple // num_images
+
     overlay_positions = state.config["overlay_positions"]
 
     # Apply overlays
     for i, frame_path in enumerate(state.frame_paths):
         frame = Image.open(frame_path).convert("RGBA")
 
-        overlay_index = min(i // frames_per_image, len(overlay_images) - 1)
+        overlay_index = min(i // frames_per_image, num_images - 1)
         overlay_img = Image.open(overlay_images[overlay_index]).convert("RGBA")
 
         pos_index = min(i // frames_per_image, len(overlay_positions) - 1)
