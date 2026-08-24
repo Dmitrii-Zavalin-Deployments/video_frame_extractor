@@ -1,3 +1,5 @@
 {
-  "input_example": "placeholder"
+  "background_video_path": "data/testing-input-output/background.mp4",
+  "overlay_zip_path": "data/testing-input-output/overlay_object.zip",
+  "output_zip_path": "data/testing-input-output/output_frames.zip"
 }

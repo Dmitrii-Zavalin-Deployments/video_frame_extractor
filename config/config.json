@@ -1,4 +1,14 @@
 {
-  "project": "Video Frame Extractor",
-  "short_name": "video_frame_extractor"
+  "overlay_positions": [
+    {
+      "x": 0.0,
+      "y": 0.0,
+      "pitch": 0.0,
+      "roll": 0.0,
+      "yaw": 0.0,
+      "background_transparency": 1.0,
+      "overlay_transparency": 1.0
+    }
+  ],
+  "frames_per_image": 1
 }
