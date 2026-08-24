@@ -1,0 +1,25 @@
+{
+  "inputs": {
+    "background_video_path": "data/testing-input-output/background.mp4",
+    "overlay_zip_path": "data/testing-input-output/overlay_object.zip",
+    "output_zip_path": "data/testing-input-output/output_frames.zip"
+  },
+  "config": {
+    "overlay_positions": [
+      {
+        "x": 0.0,
+        "y": 0.0,
+        "pitch": 0.0,
+        "roll": 0.0,
+        "yaw": 0.0,
+        "background_transparency": 1.0,
+        "overlay_transparency": 1.0
+      }
+    ],
+    "frames_per_image": 1
+  },
+  "results": {
+    "status": "success",
+    "error": ""
+  }
+}
