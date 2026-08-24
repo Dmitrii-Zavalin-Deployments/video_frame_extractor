@@ -301,7 +301,7 @@ jobs:
         with:
           name: output-frames-package
           path: data/testing-input-output/output_frames.zip
-          retention-days: 14
+          retention-days: 1
 
       - name: 💾 Sync Testing Assets to Repository
         if: always()
