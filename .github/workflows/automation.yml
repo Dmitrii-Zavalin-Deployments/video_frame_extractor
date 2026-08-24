@@ -295,6 +295,14 @@ jobs:
           echo "--- Running Standalone JSON Schema Verification ---"
           python src/utils/validate_schema.py
 
+      - name: 📦 Upload Frames Package Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: output-frames-package
+          path: data/testing-input-output/output_frames.zip
+          retention-days: 14
+
       - name: 💾 Sync Testing Assets to Repository
         if: always()
         run: |
@@ -307,8 +315,8 @@ jobs:
           # 3. Restore stashed changes
           git stash pop || true
 
-          # 4. Add the specific test folder
-          git add data/testing-input-output/
+          # 4. Explicitly add only lightweight JSON manifests (avoiding heavy zip and frames)
+          git add data/testing-input-output/input.json data/testing-input-output/output.json || true
 
           # 5. Commit/Push with Notes
           if [ -n "$(git status --porcelain data/testing-input-output/)" ]; then
@@ -329,6 +337,16 @@ jobs:
           else
             echo "No testing asset changes detected. Sync skipped."
           fi
+
+          # 📦 Informational notice regarding the decoupled ZIP artifact
+          RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          echo "------------------------------------------------------------------"
+          echo "📦 ARTIFACT NOTICE: output_frames.zip was excluded from Git"
+          echo "   to stay under GitHub's 100 MB file-size limit."
+          echo "✨ Instead, it has been successfully uploaded as a GitHub Action Artifact!"
+          echo "🔗 Download your frames package zip directly from the run summary page:"
+          echo "   $RUN_URL"
+          echo "------------------------------------------------------------------"
 
       - name: 📊 Audit Performance Ledger & Sync
         if: always()
