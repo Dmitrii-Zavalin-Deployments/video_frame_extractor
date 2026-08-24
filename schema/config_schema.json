@@ -1,23 +1,61 @@
 {
   "type": "object",
+  "description": "Configuration settings for spatial positioning, transparency levels, and rendering behavior.",
   "properties": {
     "overlay_positions": {
       "type": "array",
+      "description": "Array of positioning, rotation, and transparency parameters for the overlay across frames.",
       "items": {
         "type": "object",
         "properties": {
-          "x": { "type": "number" },
-          "y": { "type": "number" },
-          "pitch": { "type": "number" },
-          "roll": { "type": "number" },
-          "yaw": { "type": "number" },
-          "alpha": { "type": "number" }
+          "x": {
+            "type": "number",
+            "description": "X coordinate position."
+          },
+          "y": {
+            "type": "number",
+            "description": "Y coordinate position."
+          },
+          "pitch": {
+            "type": "number",
+            "description": "Pitch rotation angle."
+          },
+          "roll": {
+            "type": "number",
+            "description": "Roll rotation angle."
+          },
+          "yaw": {
+            "type": "number",
+            "description": "Yaw rotation angle."
+          },
+          "background_transparency": {
+            "type": "number",
+            "description": "Transparency level of the background video."
+          },
+          "overlay_transparency": {
+            "type": "number",
+            "description": "Transparency level of the inserted overlay object."
+          }
         },
-        "required": ["x", "y", "pitch", "roll", "yaw", "alpha"]
+        "required": [
+          "x",
+          "y",
+          "pitch",
+          "roll",
+          "yaw",
+          "background_transparency",
+          "overlay_transparency"
+        ]
       }
     },
-    "frames_per_image": { "type": "number", "minimum": 1 },
-    "output_zip_name": { "type": "string" }
+    "frames_per_image": {
+      "type": "number",
+      "minimum": 1,
+      "description": "Number of video frames each overlay image should be displayed on."
+    }
   },
-  "required": ["overlay_positions", "frames_per_image", "output_zip_name"]
+  "required": [
+    "overlay_positions",
+    "frames_per_image"
+  ]
 }

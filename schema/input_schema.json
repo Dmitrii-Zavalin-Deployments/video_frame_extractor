@@ -1,19 +1,23 @@
 {
   "type": "object",
+  "description": "Input files and resources required for the video overlay process.",
   "properties": {
-<<<<<<< Updated upstream
-    "video_path": { "type": "string" },
-    "engine_images": {
-      "type": "array",
-      "items": { "type": "string" },
-      "minItems": 1
+    "background_video_path": {
+      "type": "string",
+      "description": "Path to the background video file."
+    },
+    "overlay_zip_path": {
+      "type": "string",
+      "description": "Path to the zip archive containing the images of the object to insert on top of the video."
+    },
+    "output_zip_path": {
+      "type": "string",
+      "description": "Path where the final output zip file will be saved."
     }
   },
-  "required": ["video_path", "engine_images"]
+  "required": [
+    "background_video_path",
+    "overlay_zip_path",
+    "output_zip_path"
+  ]
 }
-=======
-    "input_video": { "type": "string" }
-  },
-  "required": ["input_video"]
-}
->>>>>>> Stashed changes

@@ -1,28 +1,113 @@
 {
   "type": "object",
+  "description": "Root schema for the video overlay processing task.",
   "properties": {
     "inputs": {
       "type": "object",
+      "description": "Input files and resources required for the video overlay process.",
       "properties": {
-        "input_example": { "type": "string" }
+        "background_video_path": {
+          "type": "string",
+          "description": "Path to the background video file."
+        },
+        "overlay_zip_path": {
+          "type": "string",
+          "description": "Path to the zip archive containing the images of the object to insert on top of the video."
+        },
+        "output_zip_path": {
+          "type": "string",
+          "description": "Path where the final output zip file will be saved."
+        }
       },
-      "required": ["input_example"]
+      "required": [
+        "background_video_path",
+        "overlay_zip_path",
+        "output_zip_path"
+      ]
     },
     "config": {
       "type": "object",
+      "description": "Configuration settings for spatial positioning, transparency levels, and rendering behavior.",
       "properties": {
-        "project": { "type": "string" },
-        "short_name": { "type": "string" }
+        "overlay_positions": {
+          "type": "array",
+          "description": "Array of positioning, rotation, and transparency parameters for the overlay across frames.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number",
+                "description": "X coordinate position."
+              },
+              "y": {
+                "type": "number",
+                "description": "Y coordinate position."
+              },
+              "pitch": {
+                "type": "number",
+                "description": "Pitch rotation angle."
+              },
+              "roll": {
+                "type": "number",
+                "description": "Roll rotation angle."
+              },
+              "yaw": {
+                "type": "number",
+                "description": "Yaw rotation angle."
+              },
+              "background_transparency": {
+                "type": "number",
+                "description": "Transparency level of the background video."
+              },
+              "overlay_transparency": {
+                "type": "number",
+                "description": "Transparency level of the inserted overlay object."
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "pitch",
+              "roll",
+              "yaw",
+              "background_transparency",
+              "overlay_transparency"
+            ]
+          }
+        },
+        "frames_per_image": {
+          "type": "number",
+          "minimum": 1,
+          "description": "Number of video frames each overlay image should be displayed on."
+        }
       },
-      "required": ["project", "short_name"]
+      "required": [
+        "overlay_positions",
+        "frames_per_image"
+      ]
     },
     "results": {
       "type": "object",
+      "description": "Execution output details including final status and error logs if any.",
       "properties": {
-        "status": { "type": "string" }
+        "status": {
+          "type": "string",
+          "description": "Current status of the execution (e.g., success, error)."
+        },
+        "error": {
+          "type": "string",
+          "description": "Error description if the processing fails."
+        }
       },
-      "required": ["status"]
+      "required": [
+        "status",
+        "error"
+      ]
     }
   },
-  "required": ["inputs", "config", "results"]
+  "required": [
+    "inputs",
+    "config",
+    "results"
+  ]
 }

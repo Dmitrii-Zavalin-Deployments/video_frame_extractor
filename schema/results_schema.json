@@ -1,9 +1,18 @@
 {
   "type": "object",
+  "description": "Execution output details including final status and error logs if any.",
   "properties": {
-    "status": { "type": "string" },
-    "frames_zip_path": { "type": "string" },
-    "total_frames": { "type": "number" }
+    "status": {
+      "type": "string",
+      "description": "Current status of the execution (e.g., success, error)."
+    },
+    "error": {
+      "type": "string",
+      "description": "Error description if the processing fails."
+    }
   },
-  "required": ["status", "frames_zip_path", "total_frames"]
+  "required": [
+    "status",
+    "error"
+  ]
 }
