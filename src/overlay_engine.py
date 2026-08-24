@@ -30,23 +30,30 @@ def run(state):
         pos_index = min(i // frames_per_image, len(overlay_positions) - 1)
         pos = overlay_positions[pos_index]
 
-        # Transparency
-        overlay_alpha = pos["overlay_transparency"]
-        background_alpha = pos["background_transparency"]
+        # Transparency configurations
+        overlay_alpha = float(pos["overlay_transparency"])
+        background_alpha = float(pos["background_transparency"])
 
-        # Apply background transparency
-        frame = frame.copy()
-        frame.putalpha(int(background_alpha * 255))
+        # Apply background frame transparency if less than 1.0
+        if background_alpha < 1.0:
+            r, g, b, a = frame.split()
+            a = a.point(lambda p: int(p * background_alpha))
+            frame = Image.merge("RGBA", (r, g, b, a))
 
-        # Resize overlay if needed (pitch/roll/yaw ignored for now)
-        overlay_img = overlay_img.copy()
-        overlay_img.putalpha(int(overlay_alpha * 255))
+        # Scale overlay transparency *without* destroying its transparent background mask
+        r, g, b, a = overlay_img.split()
+        a = a.point(lambda p: int(p * overlay_alpha))
+        overlay_img = Image.merge("RGBA", (r, g, b, a))
 
-        # Position
+        # Position coordinates
         x = int(pos["x"])
         y = int(pos["y"])
 
+        # Paste overlay onto frame using its alpha channel as the mask
         frame.paste(overlay_img, (x, y), overlay_img)
+
+        # Convert back to RGB for safe JPEG saving
+        frame = frame.convert("RGB")
 
         # Save processed frame
         out_path = state.processed_frames_dir / frame_path.name
