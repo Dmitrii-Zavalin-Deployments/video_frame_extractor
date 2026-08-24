@@ -2,6 +2,7 @@
   "type": "object",
   "description": "Execution output details including final status and error logs if any.",
   "properties": {
+<<<<<<< Updated upstream
     "status": {
       "type": "string",
       "description": "Current status of the execution (e.g., success, error)."
@@ -15,4 +16,11 @@
     "status",
     "error"
   ]
+=======
+    "status": { "type": "string" },
+    "frames_zip_path": { "type": "string" },
+    "total_frames": { "type": "number" }
+  },
+  "required": ["status", "frames_zip_path", "total_frames"]
+>>>>>>> Stashed changes
 }

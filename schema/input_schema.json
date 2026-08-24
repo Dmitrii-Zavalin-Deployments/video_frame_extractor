@@ -2,6 +2,7 @@
   "type": "object",
   "description": "Input files and resources required for the video overlay process.",
   "properties": {
+<<<<<<< Updated upstream
     "background_video_path": {
       "type": "string",
       "description": "Path to the background video file."
@@ -21,3 +22,9 @@
     "output_zip_path"
   ]
 }
+=======
+    "input_video": { "type": "string" }
+  },
+  "required": ["input_video"]
+}
+>>>>>>> Stashed changes
