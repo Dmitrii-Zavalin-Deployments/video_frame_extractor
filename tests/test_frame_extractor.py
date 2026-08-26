@@ -1,6 +1,4 @@
 # tests/test_frame_extractor.py
-from pathlib import Path
-import pytest
 from unittest.mock import MagicMock, patch
 
 import frame_extractor
