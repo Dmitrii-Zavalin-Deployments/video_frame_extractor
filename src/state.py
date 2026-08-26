@@ -11,9 +11,9 @@ class State:
     def __init__(self, input_data, config_data, input_output_folder):
         logger.info("Initializing State management instance.")
         if not isinstance(input_data, dict):
-            raise ValueError("Required argument 'input_data' must be a valid dictionary.")
+            raise TypeError("Required argument 'input_data' must be a valid dictionary.")
         if not isinstance(config_data, dict):
-            raise ValueError("Required argument 'config_data' must be a valid dictionary.")
+            raise TypeError("Required argument 'config_data' must be a valid dictionary.")
         if not input_output_folder:
             raise ValueError("Required argument 'input_output_folder' is missing or empty.")
 

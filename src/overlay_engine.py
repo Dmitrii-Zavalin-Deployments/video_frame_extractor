@@ -46,7 +46,7 @@ def run(state):
             raise ValueError(f"Invalid or corrupted overlay zip archive: {overlay_zip}") from bzf
 
         # Search recursively to handle nested folders inside the zip archive
-        overlay_images = sorted(list(overlay_extract_dir.rglob("*.png")))
+        overlay_images = sorted(overlay_extract_dir.rglob("*.png"))
         if not overlay_images:
             raise ValueError("No overlay PNGs found in overlay ZIP archive.")
 
@@ -114,12 +114,12 @@ def run(state):
             # Apply background frame transparency if less than 1.0
             if background_alpha < 1.0:
                 r, g, b, a = frame.split()
-                a = a.point(lambda p: int(p * background_alpha))
+                a = a.point(lambda p, bg=background_alpha: int(p * bg))
                 frame = Image.merge("RGBA", (r, g, b, a))
 
             # Scale overlay transparency *without* destroying its transparent background mask
             r, g, b, a = overlay_img.split()
-            a = a.point(lambda p: int(p * overlay_alpha))
+            a = a.point(lambda p, oa=overlay_alpha: int(p * oa))
             overlay_img = Image.merge("RGBA", (r, g, b, a))
 
             # Position coordinates
