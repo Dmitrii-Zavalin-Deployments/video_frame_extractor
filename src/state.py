@@ -1,7 +1,8 @@
 # src/state.py
-from pathlib import Path
 import json
 from datetime import datetime, timezone
+from pathlib import Path
+
 
 class State:
     def __init__(self, input_data, config_data, input_output_folder):

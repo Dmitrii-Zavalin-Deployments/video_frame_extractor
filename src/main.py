@@ -2,12 +2,14 @@
 import argparse
 import json
 from pathlib import Path
-from jsonschema import validate, ValidationError
 
-from state import State
+from jsonschema import ValidationError, validate
+
 import frame_extractor
 import overlay_engine
 import zip_builder
+from state import State
+
 
 def load_json(path):
     with open(path) as f:

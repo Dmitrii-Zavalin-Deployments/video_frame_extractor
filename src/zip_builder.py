@@ -1,6 +1,7 @@
 # src/zip_builder.py
 import zipfile
 
+
 def run(state):
     try:
         with zipfile.ZipFile(state.output_zip_path, "w", zipfile.ZIP_DEFLATED) as zf:

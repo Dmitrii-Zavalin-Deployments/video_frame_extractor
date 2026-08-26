@@ -1,7 +1,8 @@
 # src/overlay_engine.py
 import zipfile
-from pathlib import Path
+
 from PIL import Image
+
 
 def run(state):
     # Unzip overlay images

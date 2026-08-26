@@ -1,6 +1,6 @@
 # src/frame_extractor.py
 import cv2
-from pathlib import Path
+
 
 def run(state):
     video_path = state.inputs["background_video_path"]
