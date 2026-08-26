@@ -1,7 +1,7 @@
 # src/overlay_engine.py
 import logging
-from pathlib import Path
 import zipfile
+from pathlib import Path
 
 from PIL import Image
 
