@@ -1,11 +1,12 @@
 # tests/test_main.py
 import json
 import sys
-import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
 
-import main
-from main import load_json, load_schema, main as main_entry
+import pytest
+
+from main import load_json, load_schema
+from main import main as main_entry
 
 
 def test_load_json_file_not_found(tmp_path):

@@ -1,7 +1,6 @@
 # tests/test_overlay_engine.py
 import zipfile
-from pathlib import Path
-import pytest
+
 from PIL import Image
 
 import overlay_engine

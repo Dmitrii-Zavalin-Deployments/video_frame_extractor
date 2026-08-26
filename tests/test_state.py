@@ -1,7 +1,7 @@
 # tests/test_state.py
-from pathlib import Path
-import pytest
 from unittest.mock import patch
+
+import pytest
 
 from state import State
 

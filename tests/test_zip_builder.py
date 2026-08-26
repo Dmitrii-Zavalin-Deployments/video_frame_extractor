@@ -1,6 +1,6 @@
 # tests/test_zip_builder.py
 from pathlib import Path
-import pytest
+
 from PIL import Image
 
 import zip_builder
