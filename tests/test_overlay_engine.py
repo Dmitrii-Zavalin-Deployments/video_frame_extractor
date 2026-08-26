@@ -117,7 +117,7 @@ def test_no_overlay_pngs_found(tmp_path):
     """Cover line 51: ValueError when no PNGs found in zip."""
     state = MockState(tmp_path)
     empty_zip = tmp_path / "empty.zip"
-    with zipfile.ZipFile(empty_zip, "w") as zf:
+    with zipfile.ZipFile(empty_zip, "w"):
         pass
     state.inputs["overlay_zip_path"] = str(empty_zip)
 

@@ -38,8 +38,8 @@ def test_state_init_missing_input_output_folder(tmp_path):
 
 def test_state_init_os_error_on_mkdir(tmp_path):
     """Cover lines 39-41: RuntimeError raised when working directories cannot be created."""
-    with patch("pathlib.Path.mkdir", side_effect=OSError("Permission denied")):
-        with pytest.raises(RuntimeError, match="Could not create working directories"):
+    with patch("pathlib.Path.mkdir", side_effect=OSError("Permission denied")),
+         pytest.raises(RuntimeError, match="Could not create working directories"):
             State({"output_zip_path": "output.zip"}, {}, tmp_path)
 
 
@@ -73,6 +73,6 @@ def test_write_output_json_os_error(tmp_path):
     state = State(input_data, {}, tmp_path)
     out_file = tmp_path / "output.json"
 
-    with patch("builtins.open", side_effect=OSError("Disk full")):
-        with pytest.raises(RuntimeError, match="Could not write output JSON"):
+    with patch("builtins.open", side_effect=OSError("Disk full")),
+         pytest.raises(RuntimeError, match="Could not write output JSON"):
             state.write_output_json(out_file)
