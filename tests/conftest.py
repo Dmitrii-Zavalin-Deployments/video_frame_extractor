@@ -1,10 +1,11 @@
 # tests/conftest.py
 import json
 import zipfile
+
 import cv2
 import numpy as np
-from PIL import Image
 import pytest
+from PIL import Image
 
 
 @pytest.fixture

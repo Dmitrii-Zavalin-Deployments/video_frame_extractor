@@ -3,7 +3,6 @@ import json
 import logging
 import sys
 import zipfile
-import pytest
 
 from src.main import main
 
