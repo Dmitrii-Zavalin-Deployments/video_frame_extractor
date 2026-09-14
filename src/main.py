@@ -6,10 +6,16 @@ from pathlib import Path
 
 from jsonschema import ValidationError, validate
 
-import frame_extractor
-import overlay_engine
-import zip_builder
-from state import State
+try:
+    from . import frame_extractor
+    from . import overlay_engine
+    from . import zip_builder
+    from .state import State
+except ImportError:
+    import frame_extractor
+    import overlay_engine
+    import zip_builder
+    from state import State
 
 logger = logging.getLogger(__name__)
 
