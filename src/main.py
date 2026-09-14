@@ -7,9 +7,7 @@ from pathlib import Path
 from jsonschema import ValidationError, validate
 
 try:
-    from . import frame_extractor
-    from . import overlay_engine
-    from . import zip_builder
+    from . import frame_extractor, overlay_engine, zip_builder
     from .state import State
 except ImportError:
     import frame_extractor
